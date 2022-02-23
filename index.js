@@ -6,6 +6,8 @@ const roleController = require("./controller/role-controller")
 const userController = require("./controller/user-controller")
 const scheduleController = require("./controller/schedule-controller")
 const categoryController = require("./controller/category-controller")
+const scheduleMasterController = require("./controller/scheduleMaster-controller")
+const dailyScheduleController = require('./controller/dailySchedule-controller')
 
 
 const app = express()
@@ -50,7 +52,23 @@ app.get("/category",categoryController.getAllCategory)
 app.delete("/category/:categoryId",categoryController.deleteCategory)
 app.put("/category",categoryController.updateCategory)
 
+//schedule master
+app.post("/scheduleMasters",scheduleMasterController.addScheduleMaster)
+app.get("/scheduleMasters",scheduleMasterController.getAllSchedule)
+app.delete("/scheduleMasters/:scheduleMasterId",scheduleMasterController.deleteScheduleMaster)
+app.put("/scheduleMasters",scheduleMasterController.updateSchedule)
 
+//daily schedule master
+app.post("/dailySchedule",dailyScheduleController.addDailySchedule)
+app.get("/dailySchedule",dailyScheduleController.getAllDailySchedule)
+app.delete("/dailySchedule/:dailyScheduleId",dailyScheduleController.deleteDailySchedule)
+app.put("/dailySchedule",dailyScheduleController.updateDailySchedule)
+
+//Reminder
+app.post("/reminder",reminderController.addReminder)
+app.get("/reminder",reminderController.getAllReminder)
+app.delete("/reminder/:reminderId",reminderController.deleteReminder)
+app.put("/reminder",reminderController.updateReminder)
 
 
 app.listen(3000,function(){

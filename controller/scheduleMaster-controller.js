@@ -37,7 +37,7 @@ module.exports.addScheduleMaster = function (req,res) {
     //model 
 
     //REST 
-    SchedulerMasterModel.find().populate(userId,categoryName,scheduleId).exec(function(err,addScheduleMaster){
+    SchedulerMasterModel.find().populate().exec(function(err,addScheduleMaster){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{
@@ -46,11 +46,14 @@ module.exports.addScheduleMaster = function (req,res) {
 
     })
 }
+
+
     module.exports.updateSchedule = function(req,res){
+        let schId = req.body.scheduleMasterId
         let startDate = req.body.startDate 
-        let endDate = req.body.endDate 
+        let endDate = req.body.endDate
     
-        SchedulerMasterModel.updateOne({startDate:startDate},{endDate:endDate},function(err,data){
+        SchedulerMasterModel.updateOne({ "_id":schId},{startDate:startDate},{endDate:endDate},function(err,data){
             if(err){
                 res.json({msg:"Something went wrong!!!",status:-1,data:err})
             }else{
@@ -59,11 +62,11 @@ module.exports.addScheduleMaster = function (req,res) {
         })
     
  }
- module.exports.deleteSchedule = function(req,res){
-    let scheduleId = req.params.scheduleId
+ module.exports.deleteScheduleMaster = function(req,res){
+    let scheduleMasterId = req.params.scheduleMasterId
 
     //delete from schedule where scheduleId = 1 
-    SchedulerMasterModel.deleteOne({"startDate":startDate},function(err,data){
+    SchedulerMasterModel.deleteOne({"_id":scheduleMasterId },function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{
